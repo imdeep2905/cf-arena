@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
 import React from 'react';
 import './homepage.css';
+import { connect } from 'react-redux';
 
-const homepage = () => {
+const Homepage = () => {
 
 return (
   <div class="main">
@@ -9,7 +11,9 @@ return (
       <div class="form">
         <input class="text_input" name="handle" placeholder="Codeforces handle" /> <br/>
         <div className="buttons">
-            <button class="button button-dark">Create</button>
+            <Link to='/room'>
+              <button onClick={goToRoom} class="button button-dark">Create</button> 
+            </Link>
             <button class="button button-dark">Join</button>    
         </div>
       </div>
@@ -17,4 +21,11 @@ return (
   )
 }
 
-export default homepage;
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Homepage);
