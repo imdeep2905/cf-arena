@@ -137,7 +137,7 @@ class CreateProblems(APIView):
 
         Output
         ======
-        JsonResponse:
+        Response:
             payload (dict):
                 - status (OK/FAILED)
                 - problems (list of problems_urls)
@@ -186,7 +186,7 @@ class VerifyUser(APIView):
 
         Output
         ======
-        JsonResponse:
+        Response:
             payload (dict):
                 - status (OK/FAILED)
                 - rating (int)
@@ -226,7 +226,7 @@ class MatchStatus(APIView):
 
         Output
         ======
-        JsonResponse:
+        Response:
             payload (dict):
                 - problem url : solved by user1 or user2 or null
         """
