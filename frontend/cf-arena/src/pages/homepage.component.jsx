@@ -4,13 +4,14 @@ import './homepage.css';
 const homepage = () => {
 
 return (
-  <div>
-      <h1>Awesome CP</h1>
-
-      <span>CF handle:</span> <input name="handle" placeholder="enter username" /> <br/>
-      <div className="buttons">
-        <button>Create</button>
-        <button>Join</button>    
+  <div class="main">
+      <h1>CP-Arena</h1>
+      <div class="form">
+        <input class="text_input" name="handle" placeholder="Codeforces handle" /> <br/>
+        <div className="buttons">
+            <button class="button button-dark">Create</button>
+            <button class="button button-dark">Join</button>    
+        </div>
       </div>
   </div>
   )
