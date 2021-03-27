@@ -164,10 +164,10 @@ class CreateProblems(APIView):
                 available_problems = CreateProblems.get_problems(
                     min_rating, max_rating
                 )
-                while True:
-                    problem = random.choice(available_problems)
-                    if problem not in excluded_problems:
-                        problems.append(problem)
+                random.shuffle(available_problems)
+                for problem in available_problems:
+                    if problem.problem_url not in excluded_problems:
+                        problems.append(problem.problem_url)
                         break
             return Response({"status": "OK", "problems": problems})
 
