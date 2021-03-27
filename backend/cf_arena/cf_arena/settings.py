@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "arena",
     "rest_framework",
     'corsheaders',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -74,6 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "cf_arena.wsgi.application"
+ASGI_APPLICATION = "cf_arena.asgi.application"
 
 
 # Database
