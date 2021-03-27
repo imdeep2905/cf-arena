@@ -1,0 +1,10 @@
+{
+    "cSpell.words": [
+        "application",
+        "asgi",
+        "g",
+        "get"
+    ],
+    "python.pythonPath": "backend/venv/bin/python",
+    "python.formatting.provider": "black"
+}
