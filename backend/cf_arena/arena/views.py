@@ -5,7 +5,7 @@ import constants
 import math
 import random
 from .helpers import generate_problem_url, helper_response
-from .models import AllProblems
+from .models import *
 
 
 class AllProblemsUpdate(APIView):
@@ -262,4 +262,34 @@ class MatchStatus(APIView):
 
         for res in return_payload:
             return_payload[res] = return_payload[res][0]
+        return Response(return_payload)
+
+
+class CreateRoom(APIView):
+    def post(self, request):
+        """
+        Given a user handle, create a new room for that user.
+
+        Input
+        =====
+        cf_handle (str): Codeforces Handle of the user.
+
+        Output
+        ======
+        room_id (str): Unique ID of the newly created room.
+        """
+        return_payload = {}
+        try:
+            data = request.data
+            cf_handle = data.get('cf_handle')
+            room_instance = Room.objects.create(user_handle_1=cf_handle)
+
+            return_payload = {
+                "status": "OK",
+                "room_id": room_instance.id,
+            }
+
+        except Exception as ex:
+            return_payload = {"status": "FAILED", "error": str(ex)}
+
         return Response(return_payload)
