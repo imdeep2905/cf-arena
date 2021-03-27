@@ -14,4 +14,5 @@ urlpatterns = [
         views.CreateProblems.as_view(),
         name="create_problems",
     ),
+    path("match_status", views.MatchStatus.as_view(), name="match_status"),
 ]
