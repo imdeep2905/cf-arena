@@ -1,12 +1,50 @@
-span, h1{
-    color: white;
+span,
+h1 {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  margin: auto auto;
+  color: white;
 }
 
-.buttons {
-    margin-top: 40px;
-    margin-bottom: 40px;
+.button {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 8px 50px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 10px 10px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+}
+.button-dark {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
 }
 
-button {
-    margin-left: 20px;
+.button-dark:hover {
+  background-color: #222f3e;
+  color: white;
+}
+
+.text_input {
+  width: 318px;
+  height: 20px;
+  font-size: 20px;
+}
+
+.main {
+  width: 25%;
+  height: 300px;
+  margin: auto auto;
+  margin-top: 10%;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #21465e 0%, rgba(33, 70, 94, 0) 100%);
+}
+.form {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
