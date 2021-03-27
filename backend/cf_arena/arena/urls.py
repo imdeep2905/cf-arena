@@ -9,4 +9,5 @@ urlpatterns = [
     ),
     path("verify_user/", views.VerifyUser.as_view(), name="verify_user"),
     path("problems/", views.Problems.as_view(), name="problems"),
+    path("match_status", views.MatchStatus.as_view(), name="match_status"),
 ]
