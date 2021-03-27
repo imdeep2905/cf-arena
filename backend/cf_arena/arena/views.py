@@ -23,7 +23,7 @@ def verify_user(request):
                     "rating": response["result"][0]["rating"],
                     "profile_pic": response["result"][0]["titlePhoto"],
                 }
-        ).json()
+        )
         else:
             return_payload = json.dumps(
                 {"status": "FAILED", "error": response["comment"]}
@@ -46,11 +46,8 @@ def problems(request):
             for problem in submissions:
                 contestId, index = problem["problem"].get("contestId",None), problem['problem']["index"]
                 if contestId and type(index)==str:
-                    print(contestId,index)
-                # problem_url = get_by_problem_url(contestId,index)
-
-                # print(contestId,index)
-                # problem_set.add(problem_url)
+                    problem_url = get_by_problem_url(contestId,index)
+                    problem_set.add(problem_url)
 
             return_payload = json.dumps(
                 {
