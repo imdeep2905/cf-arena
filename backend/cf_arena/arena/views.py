@@ -1,7 +1,6 @@
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.request import Request, HttpRequest
 import constants
 import math
 import random
@@ -263,6 +262,7 @@ class Problems(APIView):
 
         return Response(return_payload)
 
+
 class MatchStatus(APIView):
     def post(self, request):
         """
@@ -284,26 +284,32 @@ class MatchStatus(APIView):
         user_one = data.get("user1")
         user_two = data.get("user2")
         problems = data.get("problemList")
-        
+
         return_payload = {}
         for problem in problems:
-            return_payload[problem] = [None, float('inf')]
-        
-        for user in [user_one,user_two]:
+            return_payload[problem] = [None, float("inf")]
+
+        for user in [user_one, user_two]:
             try:
                 submission_details = helper_response(user)
-                submissions = submission_details.get('result')
+                submissions = submission_details.get("result")
                 for problem in submissions:
-                    contestId, index = problem["problem"].get("contestId",None), problem['problem']["index"]
+                    contestId, index = (
+                        problem["problem"].get("contestId", None),
+                        problem["problem"]["index"],
+                    )
                     verdict = problem.get("verdict")
                     id = problem.get("id")
-                    if contestId and type(index)==str and verdict=='OK':
-                        problem_url = generate_problem_url(contestId,index)
-                        if problem_url in problems and id<return_payload[problem_url][1]:
-                            return_payload[problem_url]=[user,id]
+                    if contestId and type(index) == str and verdict == "OK":
+                        problem_url = generate_problem_url(contestId, index)
+                        if (
+                            problem_url in problems
+                            and id < return_payload[problem_url][1]
+                        ):
+                            return_payload[problem_url] = [user, id]
             except:
                 pass
 
         for res in return_payload:
-            return_payload[res]= return_payload[res][0]
+            return_payload[res] = return_payload[res][0]
         return Response(return_payload)
