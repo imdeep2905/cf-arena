@@ -164,10 +164,10 @@ class CreateProblems(APIView):
                 available_problems = CreateProblems.get_problems(
                     min_rating, max_rating
                 )
-                random.shuffle(available_problems)
-                for problem in available_problems:
-                    if problem.problem_url not in excluded_problems:
-                        problems.append(problem.problem_url)
+                while True:
+                    problem = random.choice(available_problems)
+                    if problem not in excluded_problems:
+                        problems.append(problem)
                         break
             return Response({"status": "OK", "problems": problems})
 
@@ -210,56 +210,6 @@ class VerifyUser(APIView):
             }
         except Exception as ex:
             return_payload = {"status": "FAILED", "error": str(ex)}
-        return Response(return_payload)
-
-
-class Problems(APIView):
-    def get(self, request):
-        """
-        Given a user handle, returns all the problems solved by that user.
-
-        Input
-        =====
-        cf_handle (str): Handle of the user.
-
-        Output
-        ======
-        JsonResponse:
-            payload (dict):
-                - status (OK/FAILED)
-                - Problems (Array of urls)
-        """
-        data = request.query_params
-        cf_handle = data.get("cf_handle")
-        return_payload = {}
-
-        try:
-            response = requests.get(
-                f"{constants.CODEFORCES_URL}api/user.status?handle={cf_handle}"
-            ).json()
-
-            if response["status"] != "OK":
-                raise Exception(response["comment"])
-
-            submissions = response.get("result")
-            problem_set = set([])
-            for problem in submissions:
-                contest_id, index = (
-                    problem["problem"].get("contestId"),
-                    problem["problem"].get("index"),
-                )
-
-                if contest_id and isinstance(index, str):
-                    problem_url = generate_problem_url(contest_id, index)
-                    problem_set.add(problem_url)
-
-            return_payload = {
-                "status": "OK",
-                "Problems": list(problem_set),
-            }
-        except Exception as ex:
-            return_payload = {"status": "FAILED", "error": str(ex)}
-
         return Response(return_payload)
 
 

@@ -8,7 +8,6 @@ urlpatterns = [
         name="all_problems_update",
     ),
     path("verify_user/", views.VerifyUser.as_view(), name="verify_user"),
-    path("problems/", views.Problems.as_view(), name="problems"),
     path(
         "create_problems/",
         views.CreateProblems.as_view(),
