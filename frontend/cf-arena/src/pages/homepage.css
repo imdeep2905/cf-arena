@@ -1,0 +1,12 @@
+span, h1{
+    color: white;
+}
+
+.buttons {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+button {
+    margin-left: 20px;
+}
