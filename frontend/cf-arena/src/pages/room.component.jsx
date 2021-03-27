@@ -5,7 +5,7 @@ import handle2 from '../iamprayush.jpeg';
 
 const room = () => {
 
-  const listUser = [
+  const user = [
     {
       "username": "iamprayush",
       "userpic": handle1,
