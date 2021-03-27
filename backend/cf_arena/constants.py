@@ -1,1 +1,1 @@
-CODEFORCES_URL = 'https://codeforces.com/'
+CODEFORCES_URL = "https://codeforces.com/"
