@@ -48,3 +48,16 @@ h1 {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+.margin-up {
+  padding-top: 30px;
+}
+
+.rules {
+  width: 75%;
+  margin: auto auto;
+  float: inherit;
+  color: #e5e5e5;
+  font-size: 18px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #21465e 0%, rgba(33, 70, 94, 0) 100%);
+}
