@@ -1,11 +1,11 @@
-import React from "react";
+import { React, useEffect } from "react";
 import "./room.css";
 import handle1 from "../deepraval.png";
 import handle2 from "../iamprayush.jpeg";
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-const Room = () => {
+const Room = ({currentUser}) => {
   const user = [
     {
       username: "iamprayush",
