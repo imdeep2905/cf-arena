@@ -3,6 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 import constants
+from .helpers import *
 from .models import *
 
 
@@ -27,7 +28,7 @@ class AllProblemsUpdate(APIView):
 
                 if contest_id and problem_index and rating:
                     problem_instance, created = AllProblems.objects.update_or_create(
-                        problem_url=f'https://codeforces.com/contest/{contest_id}/problem/{problem_index}',
+                        problem_url=generate_problem_url(contest_id, problem_index),
                         rating=rating,
                     )
 
@@ -61,7 +62,7 @@ class VerifyUser(APIView):
                 - rating (int)
                 - profile_pic_url (str) 
         '''
-        data = request.GET
+        data = request.query_params
         cf_handle = data.get("cf_handle")
         return_payload = {}
 
@@ -81,4 +82,39 @@ class VerifyUser(APIView):
             return_payload = {
                 "status": "FAILED", "error": str(ex)
             }
+        return Response(return_payload)
+
+
+
+class Problems(APIView):
+    def get(self, request):
+        data = request.query_params
+        cf_handle = data.get("cf_handle")
+        return_payload = {}
+
+        try:
+            response = requests.get(
+                f"{constants.CODEFORCES_URL}api/user.status?handle={cf_handle}"
+            ).json()
+
+            if response["status"] != "OK":
+                raise Exception(response["comment"])
+
+            submissions = response.get('result')
+            problem_set = set([])
+            for problem in submissions:
+                contest_id, index = problem["problem"].get("contestId"), problem['problem'].get("index")
+ 
+                if contest_id and isinstance(index, str):
+                    problem_url = generate_problem_url(contest_id, index)
+                    problem_set.add(problem_url)
+
+            return_payload = {
+                "Problems": list(problem_set),
+            }
+        except Exception as ex:
+            return_payload = {
+                "status": "FAILED", "error": str(ex)
+            }
+
         return Response(return_payload)
