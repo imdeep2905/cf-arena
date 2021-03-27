@@ -3,12 +3,45 @@
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 50px;
+    padding: 50px 20px;
+    width: 366px;
+    height: 400px;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #21465E 0%, rgba(33, 70, 94, 0) 100%);
 }
 
 h2, h1 {
     color: white;
 }
 
-a {
-    margin-left: 100px;
+body {
+background: #111419;
+}
+
+.problems {
+    border-radius: 20px;
+    margin: 100px auto;
+    width: 763px;
+    height: 157px;
+    background: linear-gradient(180deg, #21465E 0%, rgba(33, 70, 94, 0) 100%);
+}
+
+.timer {
+    height: 100px;
+    width: 200px;
+    color: #21465E;
+    margin: auto;
+}
+
+.problem {
+    width: 65px;
+    height: 100px;
+    margin: 20px;
+    display: inline-block;
+}
+
+.circle {
+    height: 80px;
+    width: 80px;
+    background-color: #DFDFE1;
 }
