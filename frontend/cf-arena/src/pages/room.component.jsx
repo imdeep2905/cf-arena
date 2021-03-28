@@ -13,6 +13,7 @@ const Room = ({
   rating2,
   waiting,
   roomId,
+  problemsList,
 }) => {
   const user = [
     {
@@ -34,8 +35,13 @@ const Room = ({
     let myFunc = async function () {
       let socket = await new WebSocket("ws://localhost:8000/ws/test/");
       socket.onmessage = function (e) {
+        let payload = {
+          roomId,
+          problemsList,
+        }
+        
         console.log(e.data);
-        socket.send(roomId);
+        socket.send(JSON.stringify(payload));
       };
     }
     myFunc();
@@ -124,6 +130,7 @@ const mapStateToProps = ({ user }) => {
     score1: user.score1,
     score2: user.score2,
     roomId: user.roomId,
+    problemsList: user.problems,
   };
 };
 
