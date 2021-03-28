@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import './homepage.css';
 import { connect } from 'react-redux';
-import { setCurrentUser, setSecondUser, setRoomId }from '../redux/user/action';
+import { setCurrentUser, setSecondUser, setRoomId, setProblemList }from '../redux/user/action';
 import axios from 'axios';
 
 const Homepage = (props) => {
@@ -45,7 +45,8 @@ const Homepage = (props) => {
             roomId = parseInt(joinInput)
             setroomId(roomId);
             props.setRoomId(roomId);
-            let user2=x["data"]["user1"]
+            let user2=x["data"]["user1"];
+            
             const firstUser = `http://127.0.0.1:8000/arena/verify_user?cf_handle=${user2}`;
             const firstUserDetail = await axios.get(firstUser);
             props.setCurrentUser({
@@ -53,6 +54,9 @@ const Homepage = (props) => {
               'profile_pic_url': firstUserDetail["data"]['profile_pic_url'],
               'rating': firstUserDetail["data"]["rating"]
             })
+            let problemList = await axios.get(`http://127.0.0.1:8000/arena/create_problems?cf_handle1=${handle}&cf_handle2=${user2}`);
+            problemList=problemList["data"]["problems"];
+            props.setProblemList(problemList)
           }
           
           let payload = {};
@@ -114,6 +118,7 @@ const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
   setSecondUser: (user) => dispatch(setSecondUser(user)),
   setRoomId: (roomId) => dispatch(setRoomId(roomId)),
+  setProblemList: (problemList) => dispatch(setProblemList(problemList)),
 });
 
 export default connect(null, mapDispatchToProps)(Homepage);

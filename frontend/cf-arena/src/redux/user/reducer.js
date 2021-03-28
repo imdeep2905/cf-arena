@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   rating2: 0,
   score2: 0,
   roomId: null,
+  problems: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -37,6 +38,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         roomId: action.payload,
+      }
+    }
+    case 'SET_PROBLEM_LIST': {
+      return {
+        ...state,
+        problems: action.payload,
       }
     }
     default:

@@ -13,6 +13,7 @@ const Room = ({
   rating2,
   waiting,
   roomId,
+  problemsList,
 }) => {
   const user = [
     {
@@ -38,7 +39,7 @@ const Room = ({
         if(e.data === 'Connection established.') {
           let data = {
             roomId,
-            problems: ['abc'],
+            problemsList,
           }
           socket.send(JSON.stringify(data));
         }
@@ -130,6 +131,7 @@ const mapStateToProps = ({ user }) => {
     score1: user.score1,
     score2: user.score2,
     roomId: user.roomId,
+    problemsList: user.problems,
   };
 };
 
