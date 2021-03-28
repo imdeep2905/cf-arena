@@ -1,45 +1,24 @@
-import { React, useEffect } from "react";
+import { React } from "react";
 import "./room.css";
-import handle1 from "../deepraval.png";
-import handle2 from "../iamprayush.jpeg";
-import axios from 'axios';
 import { connect } from 'react-redux';
 
-const Room = ({currentUser}) => {
+const Room = ({handle1,handle2,score1,score2,profile_pic_url1,profile_pic_url2,rating1,rating2, waiting}) => {
   const user = [
     {
-      username: "iamprayush",
-      userpic: handle1,
-      rating: 1100,
-      score: 0,
+      username: handle1,
+      userpic: 'https:'+profile_pic_url1,
+      rating: rating1,
+      score: score1,
     },
     {
-      username: "deep",
-      userpic: handle2,
-      rating: 1200,
-      score: 0,
+      username: handle2,
+      userpic: profile_pic_url2,
+      rating: rating2,
+      score: score2,
     },
   ];
 
   const problems = [100, 200, 300, 400, 500];
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const config = {};
-      const url = `http://127.0.0.1:8000/arena/verify_user?cf_handle=${currentUser}`;
-      try {
-        console.log(currentUser);
-        const user = await axios.get(url, config);
-        console.log(user);
-        const data = await user.json();
-        console.log(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   return (
     <div className="room">
@@ -54,9 +33,9 @@ const Room = ({currentUser}) => {
           height="150"
           width="150"
         />
-        <h2>{user.username}</h2>
-        <h2>Rating: {user.rating}</h2>
-        <h2>score: {user.score}</h2>
+        <h2>{user[0].username}</h2>
+        <h2>Rating: {user[0].rating}</h2>
+        <h2>score: {user[0].score}</h2>
         <button>Ready</button>
       </div>
 
@@ -67,15 +46,15 @@ const Room = ({currentUser}) => {
           height="150"
           width="150"
         />
-        <h2>{user.username}</h2>
-        <h2>Rating: {user.rating}</h2>
-        <h2>score: {user.score}</h2>
+        <h2>{user[1].username}</h2>
+        <h2>Rating: {user[1].rating}</h2>
+        <h2>score: {user[1].score}</h2>
         <button>Ready</button>
       </div>
 
       <div className="problems">
         {problems.map((prob) => (
-          <div className="problem">
+          <div className="problem" key={prob}>
             <div className="circle">Hello</div>
             <a href="a">{prob}</a>
           </div>
@@ -85,8 +64,17 @@ const Room = ({currentUser}) => {
   );
 };
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.handle,
-});
+const mapStateToProps = ({ user }) => {
+  return {
+  handle1: user.handle1,
+  profile_pic_url1:user.userpic1,
+  rating1: user.rating1,
+  handle2: user.handle2,
+  profile_pic_url2:user.userpic2,
+  rating2: user.rating2,
+  waiting: user.Waiting,
+  score1: user.score1,
+  score2: user.score2,
+}};
 
 export default connect(mapStateToProps, null)(Room);
