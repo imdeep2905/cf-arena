@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
-import room from '../src/pages/room.component';
-import homepage from '../src/pages/homepage.component';
+import Room from '../src/pages/room.component';
+import Homepage from '../src/pages/homepage.component';
 import Header from '../src/components/header.component';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
@@ -10,8 +10,8 @@ function App() {
     <div className="App">
       <Header />
       <Switch>
-        <Route exact path='/' component={homepage} />
-        <Route exact path='/room/' component={room} />
+        <Route exact path='/' component={Homepage} />
+        <Route exact path='/room/' component={Room} />
       </Switch>
     </div>
   );
