@@ -3,7 +3,7 @@ import './header.css'
 const Header = () => {
   return (
     <div className="header">
-        CP-Arena
+        <a href="http://localhost:3000/">CP-Arena</a>
     </div>
   )
 }

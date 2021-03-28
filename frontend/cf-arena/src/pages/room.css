@@ -19,7 +19,11 @@
 }
 
 .user2 {
-    color: #C83333;
+    color: #fb6d6d;
+}
+
+.button-dark:focus {
+    background-color: #44bd32;
 }
 
 body {
@@ -61,7 +65,18 @@ body {
 }
 
 .problemPointsWidth {
-    width: 80px
+    width: 80px;
+}
+
+.circle p {
+    position: relative;
+    bottom: -22px;
+    font-weight: bold;
+}
+
+.problemPointsWidth a {
+    color: #E5E5E5;
+    text-decoration: none;
 }
 
 .button {
