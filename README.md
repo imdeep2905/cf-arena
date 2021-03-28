@@ -6,5 +6,9 @@ After entering your codeforces handle you can either create or join the room. Af
 Firstly, to decide difficuly of problems we take average of both of your rating on codeforces. According to this average difficulties of five problems are determined. After this we just select random problems untill that problem is not attempted by any of you.
 ## What you need ?
 All you need is an account on codeforces and an inner fire to beat your friend 😆. 
+## How to run ?
+1. First go to ```backend/cf_arena``` and follow instruction in ```README.md``` to run the server.
+2. After server is up and running go to ```frontend/cf-arena``` and follow instruction in ```README.md``` to run the website.
+3. Now you are good to go 🔥
 ## Want to contribute ?
-Make sure to review and ```CONTRIBUTING.md``` and ```CODE_OF_CONDUCT.md``` and then you should be good to go.
+Make sure to review  ```CONTRIBUTING.md``` and ```CODE_OF_CONDUCT.md``` and then you should be good to go.
