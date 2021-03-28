@@ -76,15 +76,6 @@ const Room = ({currentUser}) => {
               <h3 className="problemPointsWidth whiteText">{value}</h3>
             </div>
           ))}</div>
-
-      <div className="problems">
-        {problems.map((prob) => (
-          <div className="problem">
-            <div className="circle">Hello</div>
-            <a href="a">{prob}</a>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { React, useState } from "react";
 import "./homepage.css";
 import { connect } from "react-redux";
 import setCurrentUser from "../redux/user/action";
+import logo from "../cp-arena-logo.png";
 
 const Homepage = () => {
   const [handle, setHandle] = useState("");
@@ -18,7 +19,7 @@ const Homepage = () => {
 return (
  <div>
     <div class="main">
-      <h1>CP-Arena</h1>
+      <img src={logo} alt="this is car image"></img>
       <div class="form">
         <input
           class="text_input"
