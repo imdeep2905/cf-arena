@@ -34,8 +34,14 @@ const Room = ({
     let myFunc = async function () {
       let socket = await new WebSocket("ws://localhost:8000/ws/test/");
       socket.onmessage = function (e) {
-        console.log(e.data);
-        socket.send(roomId);
+        console.log('Received data:', e.data);
+        if(e.data === 'Connection established.') {
+          let data = {
+            roomId,
+            problems: ['abc'],
+          }
+          socket.send(JSON.stringify(data));
+        }
       };
     }
     myFunc();

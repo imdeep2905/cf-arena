@@ -214,27 +214,8 @@ class VerifyUser(APIView):
 
 
 class MatchStatus(APIView):
-    def post(self, request):
-        """
-        Given a user handle, return user details if the user exists.
-
-        Input
-        =====
-        user1 (str): Handle of the user one of match.
-        user2 (str): Handle of the user one of match.
-        problemList (Array of url): problemset of the match.
-
-        Output
-        ======
-        Response:
-            payload (dict):
-                - problem url : solved by user1 or user2 or null
-        """
-        data = request.data
-        user_one = data.get("user1")
-        user_two = data.get("user2")
-        problems = data.get("problemList")
-
+    @staticmethod
+    def get_status(user_one, user_two, problems):
         return_payload = {}
         for problem in problems:
             return_payload[problem] = [None, float("inf")]
@@ -262,6 +243,32 @@ class MatchStatus(APIView):
 
         for res in return_payload:
             return_payload[res] = return_payload[res][0]
+
+        return return_payload
+
+    def post(self, request):
+        """
+        Given a user handle, return user details if the user exists.
+
+        Input
+        =====
+        user1 (str): Handle of the user one of match.
+        user2 (str): Handle of the user one of match.
+        problemList (Array of url): problemset of the match.
+
+        Output
+        ======
+        Response:
+            payload (dict):
+                - problem url : solved by user1 or user2 or null
+        """
+        data = request.data
+        user_one = data.get("user1")
+        user_two = data.get("user2")
+        problems = data.get("problemList")
+
+        return_payload = MatchStatus.get_status(user_one, user_two, problems)
+        
         return Response(return_payload)
 
 
