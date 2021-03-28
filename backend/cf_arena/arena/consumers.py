@@ -1,4 +1,5 @@
 import json
+import time
 from .views import *
 from .models import *
 
@@ -19,6 +20,8 @@ class TestConsumer(WebsocketConsumer):
         if room_id and problems:
             room_instance = Room.objects.get(id=room_id)
 
-            status = MatchStatus.get_status(room_instance.user_handle_1, room_instance.user_handle_2, problems)
-            print('Status:', status)
-            self.send(json.dumps(status))
+            for i in range(1000):
+                status = MatchStatus.get_status(room_instance.user_handle_1, room_instance.user_handle_2, problems)
+                print('Status:', status)
+                self.send(json.dumps(status))
+                time.sleep(3)
