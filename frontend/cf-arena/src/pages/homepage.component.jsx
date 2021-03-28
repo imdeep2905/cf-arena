@@ -3,6 +3,7 @@ import './homepage.css';
 import { connect } from 'react-redux';
 import { setCurrentUser }from '../redux/user/action';
 import axios from 'axios';
+import logo from "../cp-arena-logo.png";
 
 const Homepage = (props) => {
 
@@ -38,7 +39,7 @@ const Homepage = (props) => {
 return (
  <div>
     <div class="main">
-      <h1>CP-Arena</h1>
+      <img src={logo} alt="this is car image"></img>
       <div class="form">
         <input
           class="text_input"

@@ -39,8 +39,9 @@ h1 {
 }
 
 .main {
-  width: 25%;
-  height: 300px;
+  width: fit-content;
+  height: fit-content;
+  padding: 50px;
   margin: auto auto;
   margin-top: 10%;
   border-radius: 20px;
@@ -57,7 +58,8 @@ h1 {
 
 .rules {
   width: 75%;
-  margin: auto auto;
+  padding: 30px;
+  margin: 100px auto;
   float: inherit;
   color: #e5e5e5;
   font-size: 18px;
