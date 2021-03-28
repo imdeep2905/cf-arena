@@ -6,3 +6,8 @@
     color: #E5E5E5;
     background: linear-gradient(180deg, #21465E 0%, rgba(33, 70, 94, 0) 100%);
 }
+
+.header a {
+    color: #E5E5E5;
+    text-decoration: none;
+}

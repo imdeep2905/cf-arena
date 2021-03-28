@@ -30,30 +30,39 @@ const Room = ({
     },
   ];
   const [room, setRoom] = useState(true);
+  const [displayScore1, setDisplayScore1] = useState(0);
+  const [displayScore2, setDisplayScore2] = useState(0);
+
+  let currentUrl = window.location.href.split('/');
+  roomId = currentUrl[currentUrl.length - 1];
 
   useEffect(() => {
     let myFunc = async function () {
       let socket = await new WebSocket("ws://localhost:8000/ws/test/");
       socket.onmessage = function (e) {
-        if(e.data === 'Connection established.') {
+        if (e.data === "Connection established.") {
           let data = {
             roomId,
             problemsList,
-          }
+          };
           socket.send(JSON.stringify(data));
         } else {
           let values = Object.values(JSON.parse(e.data));
+          let newScore1 = 0, newScore2 = 0;
           for (let i = 0; i < 5; i++) {
-            console.log(i);
             if (values[i] === handle1) {
-              document.getElementById(`${i}`).style.color = 'green';
+              document.getElementById(`${i}`).style.background = "#33C854";
+              newScore1 += (i + 1) * 100;
             } else if (values[i] === handle2) {
-              document.getElementById(`${i}`).style.color = 'red';
+              document.getElementById(`${i}`).style.background = "#fb6d6d";
+              newScore2 += (i + 1) * 100;
             }
           }
+          setDisplayScore1(newScore1);
+          setDisplayScore2(newScore2);
         }
       };
-    }
+    };
     myFunc();
   }, [room]);
 
@@ -70,7 +79,7 @@ const Room = ({
       />
       <h2 className="user2">{user[1].username}</h2>
       <h3 className="whiteText">({user[1].rating})</h3>
-      <h1 className="user2">{user[1].score}</h1>
+      <h1 className="user2">{displayScore2}</h1>
       <button class="button button-dark">Ready</button>
     </div>
   ) : (
@@ -100,7 +109,7 @@ const Room = ({
         />
         <h2 className="user1">{user[0].username}</h2>
         <h3 className="whiteText">({user[0].rating})</h3>
-        <h1 className="user1">{user[0].score}</h1>
+        <h1 className="user1">{displayScore1}</h1>
         <button class="button button-dark">Ready</button>
       </div>
       <div className="centerDiv">
@@ -110,7 +119,7 @@ const Room = ({
         <div className="roomCode">{roomId}</div>
         <br />
         <div className="timer">
-          <h1>45:60</h1>
+          <h1>69:69</h1>
         </div>
       </div>
       {user2}
@@ -118,7 +127,9 @@ const Room = ({
       <div className="problems">
         {problems.map((value, index) => (
           <div className="problem" key={value}>
-            <div id={index} className="circle">{problemType[index]}</div>
+            <div id={index} className="circle">
+              {problemType[index]}
+            </div>
             {/* Add text color to be green and red to show winner of the question */}
             <h3 className="problemPointsWidth whiteText">
               <a href={problemsList[index]}>{value}</a>

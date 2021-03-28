@@ -41,7 +41,7 @@ h1 {
 .main {
   width: fit-content;
   height: fit-content;
-  padding: 50px;
+  padding: 0px 50px;
   margin: auto auto;
   margin-top: 10%;
   border-radius: 20px;

@@ -19,7 +19,11 @@
 }
 
 .user2 {
-    color: #C83333;
+    color: #fb6d6d;
+}
+
+.button-dark:focus {
+    background-color: #44bd32;
 }
 
 body {
