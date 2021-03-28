@@ -326,6 +326,7 @@ class JoinRoom(APIView):
             return_payload = {
                 "status": "OK",
                 "message": "User successfully added to the room!",
+                "user1": room_instance[0].user_handle_1
             }
 
         except Exception as ex:

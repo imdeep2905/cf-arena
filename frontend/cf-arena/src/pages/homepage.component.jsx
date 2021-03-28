@@ -1,13 +1,14 @@
 import { React, useState } from "react";
 import './homepage.css';
 import { connect } from 'react-redux';
-import { setCurrentUser }from '../redux/user/action';
+import { setCurrentUser, setSecondUser }from '../redux/user/action';
 import axios from 'axios';
 
 const Homepage = (props) => {
 
   const [ handle, setHandle ] = useState('');
-  let [ roomId, setroomId ] = useState('');
+  let [ roomId, setroomId ] = useState(0);
+  const [joinInput, setJoinInput] = useState('');
 
   const goToRoom = () => {
     const fetchRoom = async () => {
@@ -15,24 +16,62 @@ const Homepage = (props) => {
       const user = await axios.get(url);
       const status = user["data"]["status"];
       if(status === 'OK'){
-        // roomId = await axios.get(`http://127.0.0.1:8000/arena/get_room?cf_handle=${handle}`);
-        roomId = 'abcd';
+        let x = await axios.post(`http://127.0.0.1:8000/arena/create_room/`,{
+          cf_handle: handle,
+        })
+        roomId = x["data"]["room_id"];
+        setroomId(roomId);
         let payload = {};
         payload['handle']=handle;
         payload['profile_pic_url'] = user["data"]['profile_pic_url']
         payload['rating'] = user["data"]['rating']
         props.setCurrentUser(payload);
-        setroomId(roomId);
         props.history.push(`room/${roomId}`)
       }
-      const data = user["data"];
-      console.log(data);
       }
       fetchRoom();
     };
+    const joinRoom = () => {
+      const fetchRoom = async () => {
+        const url = `http://127.0.0.1:8000/arena/verify_user?cf_handle=${handle}`;
+        const user = await axios.get(url);
+        const status = user["data"]["status"];
+        if(status === 'OK'){
+          let x = await axios.put(`http://127.0.0.1:8000/arena/join_room/`,{
+            cf_handle: handle,
+            room_id: parseInt(joinInput),
+          })
+          if(x["data"]["status"]==='OK'){
+            roomId = parseInt(joinInput)
+            setroomId(roomId);
+            let user2=x["data"]["user1"]
+            const firstUser = `http://127.0.0.1:8000/arena/verify_user?cf_handle=${user2}`;
+            const firstUserDetail = await axios.get(firstUser);
+            props.setCurrentUser({
+              'handle': x["data"]["user1"],
+              'profile_pic_url': firstUserDetail["data"]['profile_pic_url'],
+              'rating': firstUserDetail["data"]["rating"]
+            })
+          }
+          
+          let payload = {};
+          payload['handle']=handle;
+          payload['profile_pic_url'] = user["data"]['profile_pic_url']
+          payload['rating'] = user["data"]['rating']
+          props.setSecondUser(payload);
+          props.history.push(`room/${roomId}`)
+        }
+        const data = user["data"];
+        console.log(data);
+        }
+        fetchRoom();
+      };
 
   const handleChange = (event) => {
     setHandle(event.target.value);
+  };
+  const handleChangeJoin = (event) => {
+    setJoinInput(event.target.value);
   };
 
 return (
@@ -47,10 +86,15 @@ return (
           onChange={handleChange}
           value={handle}
         />{" "}
-        <br />
+        <input
+          class="text_input"
+          name="roomCode"
+          placeholder="Enter room Code"
+          onChange={handleChangeJoin}
+          value={joinInput}/>
         <div className="buttons">
           <button onClick={goToRoom} class="button button-dark">Create</button> 
-          <button class="button button-dark">Join</button>    
+          <button onClick={joinRoom} class="button button-dark">Join</button>    
         </div>
       </div>
     </div>
@@ -67,6 +111,7 @@ return (
 }
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+  setSecondUser: (user) => dispatch(setSecondUser(user)),
 });
 
 export default connect(null, mapDispatchToProps)(Homepage);

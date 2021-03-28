@@ -23,11 +23,15 @@ const userReducer = (state = INITIAL_STATE, action) => {
         rating1: action.payload.rating
       };
     }
-    // case 'SETUP_SECOND_USER':{
-    //   return {
-    //     ...state,
-    //   }
-    // }
+    case 'SET_SECOND_USER': {
+      return {
+        ...state,
+        Waiting: false,
+        handle2: action.payload.handle,
+        userpic2: action.payload.profile_pic_url,
+        rating2: action.payload.rating
+      }
+    }
     default:
       return state;
   }

@@ -12,15 +12,31 @@ const Room = ({handle1,handle2,score1,score2,profile_pic_url1,profile_pic_url2,r
     },
     {
       username: handle2,
-      userpic: profile_pic_url2,
+      userpic: 'https:' + profile_pic_url2,
       rating: rating2,
       score: score2,
     },
   ];
-
+  console.log(user)
   const problems = [100, 200, 300, 400, 500];
   const problemType = ['A', 'B', 'C', 'D', 'E'];
-
+  let user2 = !waiting ? <div className="user">
+  <img src={user[1].userpic} alt="user_one_image" height="150" width="150" />
+  <h2 className="user2">{user[1].username}</h2>
+  <h3 className="whiteText">({user[1].rating})</h3>
+  <h1 className="user2">{user[1].score}</h1>
+  <button class="button button-dark">Ready</button>
+</div> : <div className="user">
+  <img src={"https://thumbs.dreamstime.com/b/blank-man-profile-head-icon-avatar-blank-man-profile-head-icon-avatar-social-media-websites-208480728.jpg"} alt="user_one_image" height="150" width="150" />
+  <h2 className="user2">waiting for opponent</h2>
+  <h3 className="whiteText"> ? </h3>
+  <h1 className="user2">0</h1>
+  <button class="button button-dark">Ready</button>
+</div>
+  let socket = new WebSocket('ws://localhost:8000/ws/test/');
+  socket.onmessage = function(e) {
+      console.log(JSON.parse(e.data));
+  }
   return (
     <div className='room'>
       <div className="user">
@@ -38,18 +54,13 @@ const Room = ({handle1,handle2,score1,score2,profile_pic_url1,profile_pic_url2,r
         <h1>45:60</h1>
       </div>
       </div>
-      <div className="user">
-        <img src={user[1].userpic} alt="user_one_image" height="150" width="150" />
-        <h2 className="user2">{user[1].username}</h2>
-        <h3 className="whiteText">({user[1].rating})</h3>
-        <h1 className="user2">{user[1].score}</h1>
-        <button class="button button-dark">Ready</button>
-      </div>
+      {user2}
+      
 
       <div className="problems">
         {
           problems.map((value, index) => (
-            <div className="problem">
+            <div className="problem" key={value}>
               <div className="circle">{problemType[index]}</div>
                {/* Add text color to be green and red to show winner of the question */}
               <h3 className="problemPointsWidth whiteText">{value}</h3>
