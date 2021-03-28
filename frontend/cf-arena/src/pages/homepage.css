@@ -3,31 +3,33 @@ h1 {
   padding-top: 20px;
   padding-bottom: 40px;
   margin: auto auto;
-  color: white;
+  color: #E5E5E5;;
 }
 
 .button {
-  background-color: #4caf50; /* Green */
+  width: 150px;
+  background-color: #4caf50;
   border: none;
-  color: white;
+  color: #E5E5E5;;
   padding: 8px 50px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
-  margin: 10px 10px;
+  margin: 30px 10px;
   transition-duration: 0.3s;
   cursor: pointer;
 }
+
 .button-dark {
-  background-color: white;
+  background-color: #E5E5E5;;
   color: black;
   border: 2px solid #555555;
 }
 
 .button-dark:hover {
   background-color: #222f3e;
-  color: white;
+  color: #E5E5E5;;
 }
 
 .text_input {
@@ -44,7 +46,21 @@ h1 {
   border-radius: 20px;
   background: linear-gradient(180deg, #21465e 0%, rgba(33, 70, 94, 0) 100%);
 }
+
 .form {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+.margin-up {
+  padding-top: 30px;
+}
+
+.rules {
+  width: 75%;
+  margin: auto auto;
+  float: inherit;
+  color: #e5e5e5;
+  font-size: 18px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #21465e 0%, rgba(33, 70, 94, 0) 100%);
 }

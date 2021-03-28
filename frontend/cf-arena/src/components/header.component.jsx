@@ -3,7 +3,7 @@ import './header.css'
 const Header = () => {
   return (
     <div className="header">
-        cp-arena
+        CP-Arena
     </div>
   )
 }

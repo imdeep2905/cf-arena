@@ -5,7 +5,7 @@ import constants
 import math
 import random
 from .helpers import generate_problem_url, helper_response
-from .models import AllProblems
+from .models import *
 
 
 class AllProblemsUpdate(APIView):
@@ -262,4 +262,73 @@ class MatchStatus(APIView):
 
         for res in return_payload:
             return_payload[res] = return_payload[res][0]
+        return Response(return_payload)
+
+
+class CreateRoom(APIView):
+    def post(self, request):
+        """
+        Given a user handle, create a new room for that user.
+
+        Input
+        =====
+        cf_handle (str): Codeforces Handle of the user.
+
+        Output
+        ======
+        room_id (str): Unique ID of the newly created room.
+        """
+        return_payload = {}
+        try:
+            data = request.data
+            cf_handle = data.get('cf_handle')
+            room_instance = Room.objects.create(user_handle_1=cf_handle)
+
+            return_payload = {
+                "status": "OK",
+                "room_id": room_instance.id,
+            }
+
+        except Exception as ex:
+            return_payload = {"status": "FAILED", "error": str(ex)}
+
+        return Response(return_payload)
+
+
+class JoinRoom(APIView):
+    def put(self, request):
+        """
+        Adds the given user to the given room if vacant.
+
+        Input
+        =====
+        cf_handle (str): Codeforces Handle of the user.
+        room_id (str): Unique ID of the room.
+        """
+        return_payload = {}
+        try:
+            data = request.data
+            cf_handle = data.get('cf_handle')
+            room_id = data.get('room_id')
+            room_instance = Room.objects.filter(id=room_id)
+            if len(room_instance) == 0:
+                raise Exception('No room with the given ID found.')
+
+            if cf_handle in [room_instance[0].user_handle_1, room_instance[0].user_handle_2]:
+                raise Exception(
+                    'The given user is already present in the room.')
+
+            if room_instance[0].user_handle_2:
+                raise Exception('The given room is already full.')
+
+            room_instance.update(user_handle_2=cf_handle)
+
+            return_payload = {
+                "status": "OK",
+                "message": "User successfully added to the room!",
+            }
+
+        except Exception as ex:
+            return_payload = {"status": "FAILED", "error": str(ex)}
+
         return Response(return_payload)
