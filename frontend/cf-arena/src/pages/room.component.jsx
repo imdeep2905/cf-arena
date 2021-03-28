@@ -51,20 +51,18 @@ const Room = ({
           let newScore1 = 0, newScore2 = 0;
           for (let i = 0; i < 5; i++) {
             if (values[i] === handle1) {
-              document.getElementById(`${i}`).style.background = "#33C854";
-              alert(`Problem ${String.fromCharCode(65+i)} has been solved by ${handle1}`)
+              document.getElementById(`${i}`).style.background = "#33C854";              
               newScore1 += (i + 1) * 100;
             } else if (values[i] === handle2) {
-              alert(`Problem ${String.fromCharCode(65+i)} has been solved by ${handle2}`)
               document.getElementById(`${i}`).style.background = "#fb6d6d";
               newScore2 += (i + 1) * 100;
             }
           }
-          if(newScore1>750){
-            alert(`Hurray winner is ${handle1}`)
+          if(newScore1 > 750){
+            alert(`Hurray!! The winner is ${handle1}`);
           }
-          if(newScore2>750){
-            alert(`Hurray winner is ${handle2}`)
+          if(newScore2 > 750){
+            alert(`Hurray!! The winner is ${handle2}`);
           }
           setDisplayScore1(newScore1);
           setDisplayScore2(newScore2);
@@ -127,7 +125,7 @@ const Room = ({
         <div className="roomCode">{roomId}</div>
         <br />
         <div className="timer">
-          <h1>69:69</h1>
+          <h1></h1>
         </div>
       </div>
       {user2}
@@ -136,7 +134,7 @@ const Room = ({
         {problems.map((value, index) => (
           <div className="problem" key={value}>
             <div id={index} className="circle">
-              {problemType[index]}
+              <p>{problemType[index]}</p>
             </div>
             {/* Add text color to be green and red to show winner of the question */}
             <h3 className="problemPointsWidth whiteText">
