@@ -35,13 +35,22 @@ const Room = ({
     let myFunc = async function () {
       let socket = await new WebSocket("ws://localhost:8000/ws/test/");
       socket.onmessage = function (e) {
-        console.log('Received data:', e.data);
         if(e.data === 'Connection established.') {
           let data = {
             roomId,
             problemsList,
           }
           socket.send(JSON.stringify(data));
+        } else {
+          let values = Object.values(JSON.parse(e.data));
+          for (let i = 0; i < 5; i++) {
+            console.log(i);
+            if (values[i] === handle1) {
+              document.getElementById(`${i}`).style.color = 'green';
+            } else if (values[i] === handle2) {
+              document.getElementById(`${i}`).style.color = 'red';
+            }
+          }
         }
       };
     }
@@ -98,7 +107,7 @@ const Room = ({
         <div className="arenaMode">Codeforces (1v1)</div>
         <br />
         <h5 className="whiteText">Room Code</h5>
-        <div className="roomCode">4869</div>
+        <div className="roomCode">{roomId}</div>
         <br />
         <div className="timer">
           <h1>45:60</h1>
@@ -109,9 +118,11 @@ const Room = ({
       <div className="problems">
         {problems.map((value, index) => (
           <div className="problem" key={value}>
-            <div className="circle">{problemType[index]}</div>
+            <div id={index} className="circle">{problemType[index]}</div>
             {/* Add text color to be green and red to show winner of the question */}
-            <h3 className="problemPointsWidth whiteText">{value}</h3>
+            <h3 className="problemPointsWidth whiteText">
+              <a href={problemsList[index]}>{value}</a>
+            </h3>
           </div>
         ))}
       </div>
