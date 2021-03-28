@@ -8,6 +8,8 @@ const INITIAL_STATE = {
   userpic2: '',
   rating2: 0,
   score2: 0,
+  roomId: null,
+  problems: [],
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -23,11 +25,27 @@ const userReducer = (state = INITIAL_STATE, action) => {
         rating1: action.payload.rating
       };
     }
-    // case 'SETUP_SECOND_USER':{
-    //   return {
-    //     ...state,
-    //   }
-    // }
+    case 'SET_SECOND_USER': {
+      return {
+        ...state,
+        Waiting: false,
+        handle2: action.payload.handle,
+        userpic2: action.payload.profile_pic_url,
+        rating2: action.payload.rating
+      }
+    }
+    case 'SET_ROOM_ID': {
+      return {
+        ...state,
+        roomId: action.payload,
+      }
+    }
+    case 'SET_PROBLEM_LIST': {
+      return {
+        ...state,
+        problems: action.payload,
+      }
+    }
     default:
       return state;
   }

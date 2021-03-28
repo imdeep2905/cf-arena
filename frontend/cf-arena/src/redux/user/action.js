@@ -13,3 +13,12 @@ export const setWaiting = wait => ({
   payload: wait
 });
 
+export const setRoomId = roomId => ({
+  type: 'SET_ROOM_ID',
+  payload: roomId
+});
+
+export const setProblemList = problemList => ({
+  type: 'SET_PROBLEM_LIST',
+  payload: problemList
+});
