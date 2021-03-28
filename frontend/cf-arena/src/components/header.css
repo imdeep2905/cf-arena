@@ -1,4 +1,8 @@
 .header {
-    background-color: yellow;
-    height: 50px;
+    width: 100%;
+    height: 100px;
+    padding: 20px;
+    font-size: 48px;
+    color: #E5E5E5;
+    background: linear-gradient(180deg, #21465E 0%, rgba(33, 70, 94, 0) 100%);
 }
