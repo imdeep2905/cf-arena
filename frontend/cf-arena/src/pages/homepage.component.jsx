@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import './homepage.css';
 import { connect } from 'react-redux';
-import { setCurrentUser, setSecondUser }from '../redux/user/action';
+import { setCurrentUser, setSecondUser, setRoomId }from '../redux/user/action';
 import axios from 'axios';
 
 const Homepage = (props) => {
@@ -44,6 +44,7 @@ const Homepage = (props) => {
           if(x["data"]["status"]==='OK'){
             roomId = parseInt(joinInput)
             setroomId(roomId);
+            props.setRoomId(roomId);
             let user2=x["data"]["user1"]
             const firstUser = `http://127.0.0.1:8000/arena/verify_user?cf_handle=${user2}`;
             const firstUserDetail = await axios.get(firstUser);
@@ -112,6 +113,7 @@ return (
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
   setSecondUser: (user) => dispatch(setSecondUser(user)),
+  setRoomId: (roomId) => dispatch(setRoomId(roomId)),
 });
 
 export default connect(null, mapDispatchToProps)(Homepage);

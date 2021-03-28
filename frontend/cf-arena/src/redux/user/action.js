@@ -13,3 +13,7 @@ export const setWaiting = wait => ({
   payload: wait
 });
 
+export const setRoomId = roomId => ({
+  type: 'SET_ROOM_ID',
+  payload: roomId
+});

@@ -7,8 +7,8 @@ from channels.generic.websocket import WebsocketConsumer
 class TestConsumer(WebsocketConsumer):
     def connect(self):
         self.accept()
+        self.send('Connection established.')
 
-        for i in range(10):
-            print('sending data...')
-            self.send(json.dumps({'value': i}))
-            time.sleep(1)
+    def receive(self, text_data):
+        print('Received!')
+        print(text_data)

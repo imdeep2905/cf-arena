@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   userpic2: '',
   rating2: 0,
   score2: 0,
+  roomId: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -30,6 +31,12 @@ const userReducer = (state = INITIAL_STATE, action) => {
         handle2: action.payload.handle,
         userpic2: action.payload.profile_pic_url,
         rating2: action.payload.rating
+      }
+    }
+    case 'SET_ROOM_ID': {
+      return {
+        ...state,
+        roomId: action.payload,
       }
     }
     default:
