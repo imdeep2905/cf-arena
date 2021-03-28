@@ -1,36 +1,46 @@
+.room {
+    height: 1000px;
+}
+
 .user {
     display: inline-block;
-    margin-left: 100px;
-    margin-right: 100px;
-    margin-top: 50px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-top: 125px;
     padding: 50px 20px;
-    width: 366px;
+    width: 325px;
     height: 400px;
     border-radius: 20px;
     background: linear-gradient(180deg, #21465E 0%, rgba(33, 70, 94, 0) 100%);
 }
 
-h2, h1 {
-    color: white;
+.user1 {
+    color: #33C854;
+}
+
+.user2 {
+    color: #C83333;
 }
 
 body {
-background: #111419;
+    background: #111419;
 }
 
 .problems {
     border-radius: 20px;
-    margin: 100px auto;
+    margin: 50px auto;
     width: 763px;
     height: 157px;
     background: linear-gradient(180deg, #21465E 0%, rgba(33, 70, 94, 0) 100%);
 }
 
 .timer {
+    display: inline-block;
     height: 100px;
     width: 200px;
     color: #21465E;
     margin: auto;
+    font-size: 42px;
 }
 
 .problem {
@@ -43,5 +53,56 @@ background: #111419;
 .circle {
     height: 80px;
     width: 80px;
+    border-radius: 50%;
     background-color: #DFDFE1;
+    color: #111419;
+    font-size: 30px;
+    vertical-align: bottom;
+}
+
+.problemPointsWidth {
+    width: 80px
+}
+
+.button {
+    background-color: #4caf50;
+    border: none;
+    color: #E5E5E5;
+    padding: 8px 50px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 10px 10px;
+    transition-duration: 0.3s;
+    cursor: pointer;
+  }
+
+.button-dark {
+    background-color: #E5E5E5;;
+    color: black;
+    border: 2px solid #555555;
+  }
+
+.arenaMode {
+    display: inline-block;
+    color: #21465E;
+    font-size: 28px;
+    margin-bottom: 50px;
+  }
+
+.roomCode {
+    height: 40px;
+    width: 100px;
+    font-size: 28px;
+    display: inline-block;
+    color: #21465E;
+    background-color: #E5E5E5;
+}
+.whiteText {
+    color: #E5E5E5;
+}
+
+.centerDiv {
+    display: inline-block;
 }
